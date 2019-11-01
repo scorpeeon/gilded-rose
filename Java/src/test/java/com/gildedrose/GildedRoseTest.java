@@ -3,17 +3,13 @@ package com.gildedrose;
 
 import org.junit.Test;
 
+import static com.gildedrose.ItemQualityClamper.ITEM_QUALITY_MAX;
+import static com.gildedrose.ItemUpdaterStrategyFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GildedRoseTest {
 
-    public static final String ITEM_NAME_AGED_BRIE = "Aged Brie";
-    public static final String ITEM_NAME_BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String ITEM_NAME_SULFURAS = "Sulfuras, Hand of Ragnaros";
-    public static final String ITEM_NAME_CONJURED = "Conjured Item";
-
-    public static final int ITEM_QUALITY_MAX = 50;
-    public static final int ITEM_QUALITY_SULFURAS = 80;
+    private static final int ITEM_QUALITY_SULFURAS = 80;
 
     /**
      * NOTE: not in specification, just a basic sanity test
@@ -210,7 +206,7 @@ public class GildedRoseTest {
 
     @Test
     public void conjuredItemsDegradeTwiceAsFast() {
-        Item[] items = new Item[] { new Item(ITEM_NAME_CONJURED, 1, 5), new Item(ITEM_NAME_CONJURED, 0, 5), new Item(ITEM_NAME_CONJURED, -10, 5) };
+        Item[] items = new Item[] { new Item(ITEM_NAME_PREFIX_CONJURED + "0", 1, 5), new Item(ITEM_NAME_PREFIX_CONJURED + "1", 0, 5), new Item(ITEM_NAME_PREFIX_CONJURED + "2", -10, 5) };
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
