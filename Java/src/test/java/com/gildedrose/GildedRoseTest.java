@@ -10,6 +10,7 @@ public class GildedRoseTest {
     public static final String ITEM_NAME_AGED_BRIE = "Aged Brie";
     public static final String ITEM_NAME_BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     public static final String ITEM_NAME_SULFURAS = "Sulfuras, Hand of Ragnaros";
+    public static final String ITEM_NAME_CONJURED = "Conjured Item";
 
     public static final int ITEM_QUALITY_MAX = 50;
     public static final int ITEM_QUALITY_SULFURAS = 80;
@@ -205,6 +206,18 @@ public class GildedRoseTest {
         app.updateQuality();
 
         assertThat(app.items).allMatch(item -> item.quality == 0);
+    }
+
+    @Test
+    public void conjuredItemsDegradeTwiceAsFast() {
+        Item[] items = new Item[] { new Item(ITEM_NAME_CONJURED, 1, 5), new Item(ITEM_NAME_CONJURED, 0, 5), new Item(ITEM_NAME_CONJURED, -10, 5) };
+        GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(3);
+        assertThat(app.items[1].quality).isEqualTo(1);
+        assertThat(app.items[2].quality).isEqualTo(1);
     }
 
 }
