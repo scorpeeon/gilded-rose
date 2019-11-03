@@ -5,11 +5,7 @@ public class ItemQualityClamper {
     static final int ITEM_QUALITY_MAX = 50;
 
 
-    public void clampItemQuality(final Item item) {
-        if (item.quality > ITEM_QUALITY_MAX) {
-            item.quality = ITEM_QUALITY_MAX;
-        } else if (item.quality < ITEM_QUALITY_MIN) {
-            item.quality = ITEM_QUALITY_MIN;
-        }
+    public int getClampedItemQuality(final int quality) {
+        return Math.max(ITEM_QUALITY_MIN, Math.min(ITEM_QUALITY_MAX, quality));
     }
 }

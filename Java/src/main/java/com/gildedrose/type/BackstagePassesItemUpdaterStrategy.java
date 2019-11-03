@@ -13,16 +13,17 @@ public class BackstagePassesItemUpdaterStrategy implements ItemUpdaterStrategy {
 
     @Override
     public void update(final Item item) {
+        int updatedQuality = item.quality;
         if (item.sellIn > 10) {
-            item.quality += 1;
+            updatedQuality += 1;
         } else if (item.sellIn > 5) {
-            item.quality += 2;
+            updatedQuality += 2;
         } else if (item.sellIn > 0) {
-            item.quality += 3;
+            updatedQuality += 3;
         } else {
-            item.quality = 0;
+            updatedQuality = 0;
         }
-        itemQualityClamper.clampItemQuality(item);
+        item.quality = itemQualityClamper.getClampedItemQuality(updatedQuality);
         item.sellIn--;
     }
 }

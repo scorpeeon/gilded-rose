@@ -13,12 +13,13 @@ public class ConjuredItemUpdaterStrategy implements ItemUpdaterStrategy {
 
     @Override
     public void update(final Item item) {
+        int updatedQuality = item.quality;
         if (item.sellIn > 0) {
-            item.quality -= 2;
+            updatedQuality -= 2;
         } else {
-            item.quality -= 4;
+            updatedQuality -= 4;
         }
-        itemQualityClamper.clampItemQuality(item);
+        item.quality = itemQualityClamper.getClampedItemQuality(updatedQuality);
         item.sellIn--;
     }
 }

@@ -50,13 +50,13 @@ public class GildedRoseTest {
 
     @Test
     public void sellInIsLowered() {
-        Item[] items = new Item[] { new Item("foo", 5, 1), new Item("foo2", 1, 2) };
+        Item[] items = new Item[] { new Item("foo", 1, 1), new Item(ITEM_NAME_AGED_BRIE, 1, 1),
+                new Item(ITEM_NAME_BACKSTAGE_PASSES, 1, 1), new Item(ITEM_NAME_PREFIX_CONJURED, 1, 1),};
         GildedRose app = new GildedRose(items);
 
         app.updateQuality();
 
-        assertThat(app.items[0].sellIn).isEqualTo(4);
-        assertThat(app.items[1].sellIn).isEqualTo(0);
+        assertThat(app.items).allMatch(item -> item.sellIn == 0);
     }
 
     @Test

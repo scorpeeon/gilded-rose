@@ -13,12 +13,13 @@ public class AgedBrieItemUpdaterStrategy implements ItemUpdaterStrategy {
 
     @Override
     public void update(final Item item) {
+        int updatedQuality = item.quality;
         if (item.sellIn > 0) {
-            item.quality += 1;
+            updatedQuality += 1;
         } else {
-            item.quality += 2;
+            updatedQuality += 2;
         }
-        itemQualityClamper.clampItemQuality(item);
+        item.quality = itemQualityClamper.getClampedItemQuality(updatedQuality);
         item.sellIn--;
     }
 }
